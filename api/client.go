@@ -625,8 +625,8 @@ func (c *Client) Headers() http.Header {
 // AddHeader allows a single header key/value pair to be added
 // in a race-safe fashion.
 func (c *Client) AddHeader(key, value string) {
-	c.modifyLock.RLock()
-	defer c.modifyLock.RUnlock()
+	c.modifyLock.Lock()
+	defer c.modifyLock.Unlock()
 	c.headers.Add(key, value)
 }
 
